@@ -1,0 +1,97 @@
+ <?php if ((isset($_SESSION['success']))&&(($_SESSION['success'])==true)): ?> 
+  <div class='modif'>
+      <h5 >Avis Envoyer</h5>
+  </div>
+<?=$_SESSION['success']=false ?>
+<?php endif; ?> 
+
+<aside> 
+    <h1>Votre avis sur nos produits compte</h1> 
+	<div class="avis"> 
+		<?php foreach ($params['rating'] as $rating):?> 
+            <?php if (($rating->valide)==1): ?> 
+        		<div class="discussion">
+			        <blockquote>
+			            <?php foreach ($params['product'] as $product):?> 
+                            <?php if ($product->id==$rating->product_id): ?>  
+                                <article class="affiche">
+                                    <img src="<?= $product->picture?>"alt="<?= $product->permalink?>"style="width:50px;height=50px;"> 
+                                    <p><?= $product->name?> </p>
+                                </article>
+                            <?php endif; ?>  
+                        <?php endforeach ?> 
+                        <cite>
+                            Le <?= $rating->getCreatedAt()?> par 
+				            <?php foreach ($params['user'] as $user):?> 
+                                <?php if ($user->id==$rating->customer_id): ?>  
+                                    <?= $user->lastname?> de <?= $user->shippingAdressLine?>  
+                                <?php endif; ?>  
+                            <?php endforeach ?>
+                        </cite> 
+				        <q> <?= $rating->tronqueChaine() ?> </q> 
+                    <button id="open" class="plus" type="button">Afficher</button>
+			        <div id="overlay" class="overlay"></div>
+                        <div id="modal" class="modal">
+                            <h2>Commentaire</h2>
+                            <p><?=$rating->comment?></p>
+                            <button id="close" class="close" type="button">Fermer</button>
+                        </div> 
+			        </blockquote>
+			        <hr>
+			    </div>
+		    <?php endif; ?>  
+        <?php endforeach ?>
+	</div>
+	</aside> 
+	<div>
+
+<h1>Donner votre avis sur un produit</h1>    
+    <fieldset>
+      <?php if (!empty($_SESSION['errors'])): ?> 
+        <?php foreach($_SESSION['errors'] as $errorsArray): ?>
+          <?php foreach($errorsArray as $errors): ?>
+              <div class="alert alert-danger">
+                  <?php foreach($errors as $error): ?>
+                      <?= $error ?>
+                  <?php endforeach ?>
+              </div>
+          <?php endforeach ?>
+      <?php endforeach ?>
+    <?php elseif (!empty($_SESSION['errorsUpdate'])): ?> 
+      <?php foreach($_SESSION['errorsUpdate'] as $errorsArray): ?>
+          <?php foreach($errorsArray as $errors): ?>
+              <div class="alert alert-danger">
+                  <?php foreach($errors as $error): ?>
+                      <?= $error ?>
+                  <?php endforeach ?>
+              </div>
+          <?php endforeach ?>
+      <?php endforeach ?>  
+    <?php endif ?>
+     <form action="/projet/rating/create" method="POST">
+    <div for=product_id class="input-group"> 
+        <select id="product_id" name="product_id" class="custom-select">
+            <option value=0 selected>Choisir le produit</option>
+            <?php foreach ($params['product'] as $product):?> 
+                <option value=<?= $product->id ?>> <?= $product->name ?></option>
+            <?php endforeach ?> 
+        </select>
+    </div>  
+    <div class="form-group">
+        <label for="comment">Avis</label>
+        <input type="comment" class="form-control" id="comment" name="comment">
+    </div>
+    </fieldset>
+                    <button type="submit" >Envoyer</button> 
+                        </form>
+                        </div>
+                    
+
+
+
+
+
+
+
+
+

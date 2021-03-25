@@ -1,0 +1,49 @@
+<h1><?= $params['category']->title ?? 'Créer une nouvelle categorie'?></h1> 
+    <div class="text-right">
+        <a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i class="fa fa-backward"></i> Retour</a>
+    </div>
+<form action="<?= isset ($params['category']) ? "/projet/admin/category/edit/{$params['category']->id}":
+  "/projet/admin/category/create" ?>" method="POST"> 
+    <fieldset>
+      <?php if (!empty($_SESSION['errors'])): ?> 
+        <?php foreach($_SESSION['errors'] as $errorsArray): ?>
+          <?php foreach($errorsArray as $errors): ?>
+              <div class="alert alert-danger">
+                  <?php foreach($errors as $error): ?>
+                      <?= $error ?>
+                  <?php endforeach ?>
+              </div>
+          <?php endforeach ?>
+      <?php endforeach ?>
+    <?php elseif (!empty($_SESSION['errorsUpdate'])): ?> 
+      <?php foreach($_SESSION['errorsUpdate'] as $errorsArray): ?>
+          <?php foreach($errorsArray as $errors): ?>
+              <div class="alert alert-danger">
+                  <?php foreach($errors as $error): ?>
+                      <?= $error ?>
+                  <?php endforeach ?>
+              </div>
+          <?php endforeach ?>
+      <?php endforeach ?>  
+    <?php endif ?>
+        <div class="form-group">
+          <label for="title">Title </label>
+          <input type="text" class="form-control" id="title" name="title" value="<?= $params['category']->title ?? ''?>">
+        </div>
+        <div class="form-group">
+          <label for="description">Description </label>
+          <textarea rows="4" class="form-control" id="description" name="description"><?= $params['category']->description ?? ''?></textarea>
+        </div>
+        <div class="form-group">
+          <label for="picture">Picture</label>
+          <input type="text" class="form-control" id="picture" name="picture" value="<?= $params['category']->picture ?? '' ?>">
+        </div> 
+        <div class="form-group">
+          <label for="permalink">Permalink</label>
+          <input type="text" class="form-control" id="permalink" name="permalink" value="<?= $params['category']->permalink ?? '' ?>">
+        </div> 
+         
+        <button type="submit" class="btn btn-primary">
+          <?= isset($params['category']) ?'Modifier la categorie':'Enregister la categorie'?></button>
+    </fieldset>
+</form>

@@ -1,0 +1,39 @@
+<div>
+    <h1>Details du client N° <?= $params['user']->id ?></h1>   
+    <div class="text-right">
+        <a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i class="fa fa-backward"></i> Retour</a>
+    </div>
+    <article class="client ml-5 mt-4"> 
+        <img src="<?= $params['user']->picture?>"style="width:300px;height=300px" alt="<?= $params['user']->permalink?>">
+        <div class="ml-5">
+            <h2>Nom : <?= $params['user']->lastname ?></h2>
+            <h2>Prenom : <?= $params['user']->firstname ?></h2>
+            <h3>Identifiant : <?= $params['user']->id ?></h3> 
+            <h3>Creer le <?= $params['user']->getCreatedAt()?> </h3>
+            <h3>Numero telephone : <?= $params['user']->phone ?></h3> 
+            <h3>Adresse Email : <?= $params['user']->email ?></h3> 
+            <h3>Adresse domicile : <?= $params['user']->shippingAdressLine ?></h3>
+            <h3>Code postal : <?= $params['user']->shippingZipCode ?></h3>
+        </div>
+    </article>
+    <div class="text-right">
+        <a href="/projet/admin/users/edit/<?= $params['user']->id ?>"class="btn btn-warning">Modifier</a>  
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-trash"></i> Supprimer </button>
+    </div>
+</div>  
+<div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Etes vous sur ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form action="/projet/admin/users/destroy/<?= $params['user']->id ?>" method="POST" class="d-inline">
+          <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Valider </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

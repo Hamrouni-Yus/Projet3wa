@@ -1,0 +1,67 @@
+ <?php if (($_SESSION['success'])==true): ?> 
+  <div class='alert alert-success h5'>Produit enregistré</div> 
+<?=$_SESSION['success']=false ?>
+<?php endif; ?>
+ <?php if (($_SESSION['delete'])==true): ?> 
+  <div class='alert alert-danger h5'>Produit effacé</div>
+  <?= $_SESSION['delete']=false?>
+<?php endif; ?>
+<h1 class="text-center mb-5">Les Produits</h1>  
+  <p>
+    <div class="text-right"><a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i class="fa fa-backward"></i> Retour</a>
+  </div>
+  <div class="text-left"><a href="/projet/admin/product/create" class="btn btn-outline-primary "><i class="fa fa-plus"></i> Ajouter un produit </a>
+</div></p>
+<table class="table"> 
+  <thead class="table-dark"> 
+    <tr class="text-center"> 
+      <th scope="col">#</th>
+      <th scope="col">Image</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Creation</th>
+      <th scope="col">Stock</th>
+      <th scope="col">Categories</th>
+      <th scope="col">Actions</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>   
+    <?php foreach ($params['product'] as $product):?>
+    <tr class="text-center"> 
+      <th scope="row"><?= $product->id?></td>
+      <td><img src="<?= $product->picture ?>"style="width:50px;height=50px" alt="<?= $product->permalink?>"></td>
+      <td><?= $product->name ?></td>
+      <td>Creer le <?= $product->getCreatedAt() ?></td> 
+      <td><?= $product->quantity ?></td> 
+      <td><a href="/projet/admin/category/show/<?=$product->category_id?>"><?=$product->category_id?></a></td>  
+      <td>
+        <a href="/projet/admin/product/show/<?= $product->id ?>"class="btn btn-primary"><i class="fa fa-eye"></i> Voir </a>
+        <a href="/projet/admin/product/edit/<?= $product->id ?>"class="btn btn-warning"><i class="fa fa-edit"></i> Modifier </a>  
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-trash"></i> Supprimer </button>
+       </td> 
+      </tr> 
+
+
+      <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Etes vous sur ?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+            </div> 
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <form action="/projet/admin/product/destroy/<?= $product->id ?>" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Valider </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+          <?php endforeach ?>
+  </tbody>
+</table>
+
+
+
+

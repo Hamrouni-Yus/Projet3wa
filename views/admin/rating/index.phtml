@@ -1,0 +1,45 @@
+ <?php if (($_SESSION['success'])==true): ?> 
+  <div class='alert alert-success h5'>Avis Posté</div> 
+<?=$_SESSION['success']=false ?>
+<?php endif; ?>
+ <?php if (($_SESSION['delete'])==true): ?> 
+  <div class='alert alert-danger h5'>Avis effacé</div>
+  <?= $_SESSION['delete']=false?>
+<?php endif; ?>
+<h1 class="text-center mb-5">Les avis des clients sur les produits</h1>  
+  <p class="text-right"><a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i class="fa fa-backward"></i> Retour</a>
+  </p>
+<table class="table"> 
+  <thead class="table-dark"> 
+    <tr class="text-center"> 
+      <th scope="col">#</th>
+      <th scope="col">Id du client</th>   
+      <th scope="col">Id du produit</th> 
+      <th scope="col">Date de poste</th> 
+      <th scope="col">Validation</th> 
+      <th scope="col">Actions</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody> 	
+    <?php foreach ($params['rating'] as $rating):?> 
+    <tr class="text-center"> 
+      <th scope="row"><?= $rating->id?></td>
+      <td><a href="/projet/admin/user/show/<?=$rating->customer_id?>"><?= $rating->customer_id?></a></td>    
+      <td><a href="/projet/admin/product/show/<?=$rating->product_id?>"><?= $rating->product_id?></a></td>   
+      <td><?= $rating->getCreatedAt()?></td>   
+      <td><?= $rating->valide ?></td> 
+      <td> 
+        <a href="/projet/admin/rating/edit/<?= $rating->id ?>"class="btn btn-primary"><i class="fa fa-eye"></i> Voir </a>
+         <form action="/projet/admin/rating/destroy/<?= $rating->id ?>" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Supprimer </button>
+        </form> 
+      </td>
+    </tr> 
+    <?php endforeach ?>
+  </tbody>
+</table>
+
+
+
+

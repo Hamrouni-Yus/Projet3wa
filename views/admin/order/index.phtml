@@ -1,0 +1,65 @@
+
+
+ <?php if (($_SESSION['success'])==true): ?> 
+  <div class='alert alert-success h5'>Commande enregistré</div> 
+<?=$_SESSION['success']=false ?>
+<?php endif; ?>
+ <?php if (($_SESSION['delete'])==true): ?> 
+  <div class='alert alert-danger h5'>Commande effacé</div>
+  <?= $_SESSION['delete']=false?>
+<?php endif; ?>
+
+<h1 class="text-center mb-5">Les Commandes</h1>  
+  <p>
+    <div class="text-right"><a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i class="fa fa-backward"></i> Retour</a>
+  </div>
+  <div class="text-left"><a href="/projet/admin/order/create" class="btn btn-outline-primary " ><i class="fa fa-plus"></i> Ajouter une commande </a>
+</div></p>
+<table class="table"> 
+  <thead class="table-dark"> 
+    <tr class="text-center"> 
+      <th scope="col">#</th>
+      <th scope="col">Date de creation</th> 
+      <th scope="col">Date de payement</th>   
+      <th scope="col">Date de livraison</th> 
+      <th scope="col">Id Client</th> 
+      <th scope="col">Actions</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody> 	
+    <?php foreach ($params['order'] as $order):?> 
+    <tr class="text-center"> 
+      <th scope="row"><?= $order->id?></td> 
+      <td><?= $order->getCreatedAt()?></td>    
+      <td><?= $order->getPaidAt()?></td>    
+      <td><?= $order->getDeliveredAt()?></td>   
+      <td><a href="/projet/admin/user/show/<?=$order->customer_id?>"><?= $order->customer_id?></td> 
+      <td> 
+        <a href="/projet/admin/order/show/<?= $order->id ?>"class="btn btn-primary"><i class="fa fa-eye"></i> Voir </a>
+        <a href="/projet/admin/order/edit/<?= $order->id ?>"class="btn btn-warning"><i class="fa fa-edit"></i> Modifier </a>  
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-trash"></i> Supprimer </button>
+      </td> 
+    </tr> 
+      <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Etes vous sur ?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+            </div> 
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <form action="/projet/admin/order/destroy/<?= $order->id ?>" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Valider </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php endforeach ?>
+  </tbody>
+</table>
+
+
+

@@ -1,0 +1,24 @@
+<div class="login ">
+    <img class="left"src="/projet/public/img/image.png">
+    <div>
+            <?php if (isset($_SESSION['errors'])): ?>
+        <div class="alert alert-danger"> Des champs ne corresponds pas</div>
+    <?php endif ?>
+        <form class="right" action="/projet/login" method="POST"> 
+        	<h1>Bienvenue</h1>  
+            <h1>Se connecter</h1>
+            <div>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+            </div>
+            <div>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div> 
+            <div>
+                <input type="checkbox" id="remenber" name="remenber" > Se souvenir de moi
+            </div> 
+            <button class="btn-login"type="submit">Se connecter</button>
+            <button class="btn-login"><a href="/projet/signin" >S'inscrire</a></button>  
+        </form> 
+ 
+    </div>
+</div>

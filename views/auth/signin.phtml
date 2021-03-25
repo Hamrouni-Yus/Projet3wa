@@ -1,0 +1,24 @@
+<div class="login ">
+    <img class="left"src="/projet/public/img/image.png">
+    <div> 
+    <?php if (isset($_SESSION['errorsUpdate'])): ?>
+        <div class="alert alert-danger"> Des champs ne corresponds pas</div>
+    <?php endif ?>
+        <form class="right" action="/projet/signin" method="POST"> 
+            <h1>Cree un compte</h1> 
+            <div>
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="firstname"> 
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="lastname">
+            </div>
+            <div>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="phone">
+            </div>
+            <div>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Email"> 
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password"> 
+            </div>   
+            <button class="btn-login " type="submit">S'inscrire</button> 
+            <button class="btn-login"><a href="/projet/login">Se connecter</a></button> 
+        </form>  
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<?php if (isset($_SESSION['auth'])&&$_SESSION['auth'] ==='0') : ?> 
+  <h1>Vos commandes </h1>  
+  <div class="row "> 
+      <?php foreach ($params['orders'] as $order):?> 
+        <?php if ($_SESSION['id']==$order->customer_id) : ?>
+          <div class="card" style="width: 227px;"> 
+      <div class="card-body">
+        <h5 class="card-title"><?= $order->createdAt ?></h5>
+        <p class="card-text"><?= $order->deliveredAt ?></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Envoie : <?= $order->shippingAt ?></li>
+        <li class="list-group-item">Delivré : <?= $order->deliveredAt ?></li> 
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link">Voir</a> 
+      </div>
+  
+    </div>    
+        <?php endif; ?>   
+      <?php endforeach ?> 
+  </div>     
+<?php else : ?>
+  <h1>Il faut vous connectez pour voir vos commandes</h1>
+        <?php header('Location: /projet/login'); ?>
+        <?php return $this->view('auth/login'); ?>
+<?php endif; ?>
+
+
+

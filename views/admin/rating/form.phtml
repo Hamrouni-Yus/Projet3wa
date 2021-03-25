@@ -1,0 +1,67 @@
+                            <?php $rating=$params['rating'] ?>
+ <?php $user=$params['user'] ?>
+ <?php $product=$params['product'] ?>
+ <form action="/projet/admin/rating/edit/<?= $rating->id ?>" method="POST">
+<h1>Avis N°<?= $rating->id ?></h1>
+
+<h3>Posté le : <?= $rating->getCreatedAt()?></h3>                
+
+<p>
+<div class="text-right">
+    <a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i class="fa fa-backward"></i> Retour</a>
+</div>
+</p>
+<h3>Commentaire sur produit</h3>
+        <div class="mb-5">
+            <?= $rating->comment ?>
+        </div>
+        <table class="table ">
+            <thead class="table-dark">
+                <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Produit</th>
+                    <th scope="col">Publication</th>
+                    <th scope="col">Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center ">
+                    <th scope="row"><?= $rating->id ?></th>
+                    <td><a href="/projet/admin/user/show/<?= $rating->customer_id ?>"><?= $user->lastname ?> <?= $user->firstname ?></a></td>
+                    <td><a href="/projet/admin/product/show/<?= $rating->product_id ?>"><?= $product->name ?></a></td>
+                    <td>
+                        <div for=valide class="input-group"> 
+                            <select id="valide" name="valide" class="custom-select">
+                                <option value=0 selected>Pas valide</option>
+                                <option value=1>Valide</option>
+                            </select>
+                        </div>
+                    </td> 
+                    <td class="row justify-content-center "> 
+                    <button type="submit" class="btn btn-primary mr-2">Enregistrer</button> 
+                        </form>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-trash"></i> Supprimer </button>
+                    </td>
+                </tr>  
+              </tbody>
+            </table> 
+<div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Etes vous sur ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form action="/projet/admin/rating/destroy/<?= $params['rating']->id ?>" method="POST" class="d-inline">
+          <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Valider </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

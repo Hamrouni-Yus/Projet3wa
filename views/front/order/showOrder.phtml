@@ -1,0 +1,29 @@
+<h1><?= $params['product']->name?> coté Client</h1> 
+<p class="text-right"><a href="/projet/product" class="btn btn-outline-primary"><i class="icon-user-plus"></i> Retour</a></p>
+
+<table class="table"> 
+  <thead class="table-dark"> 
+    <tr> 
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Creation</th>
+      <th scope="col">quantity</th>
+      <th scope="col">price</th> 
+      <th scope="col">category</th>
+      <th scope="col">TVA</th>
+      <th></th>
+    </tr>
+  </thead> 
+  <tbody> 
+    <tr> 
+      <td scope="row"><a href="/projet/product/<?=$params['product']->id?>"><?= $params['product']->id?></td>
+      <td><?=$params['product']->name?></td>
+      <td><?=$params['product']->createdAt?></td>
+      <td><?=$params['product']->quantity?></td>
+      <td><?=$params['product']->price?></td>
+      <td><?=$params['product']->category_id?></td>
+      <td><?=$params['product']->tva_id?></td>
+      
+    </tr> 
+  </tbody>
+</table>

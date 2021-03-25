@@ -1,0 +1,81 @@
+<h1><?= $params['product']->name ?? 'Créer un nouveau produit'?></h1> 
+<form action="<?= isset ($params['product']) ? "/projet/admin/product/edit/{$params['product']->id}":
+  "/projet/admin/product/create" ?>" method="POST"> 
+  <p>
+    <div class="text-right"><a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i class="fa fa-backward"></i> Retour</a>
+  </div>
+</p>
+    <fieldset>
+<?php if (!empty($_SESSION['errors'])): ?> 
+      <?php foreach($_SESSION['errors'] as $errorsArray): ?>
+          <?php foreach($errorsArray as $errors): ?>
+              <div class="alert alert-danger">
+                  <?php foreach($errors as $error): ?>
+                      <?= $error ?>
+                  <?php endforeach ?>
+              </div>
+          <?php endforeach ?>
+      <?php endforeach ?>
+    <?php elseif (!empty($_SESSION['errorsUpdate'])): ?> 
+      <?php foreach($_SESSION['errorsUpdate'] as $errorsArray): ?>
+          <?php foreach($errorsArray as $errors): ?>
+              <div class="alert alert-danger">
+                  <?php foreach($errors as $error): ?>
+                      <?= $error ?>
+                  <?php endforeach ?>
+              </div>
+          <?php endforeach ?>
+      <?php endforeach ?>  
+    <?php endif ?>
+        <div class="form-group">
+          <label for="name">Name </label>
+          <input type="text" class="form-control" id="name" name="name" value="<?= $params['product']->name ?? ''?>">
+        </div>
+        <div class="form-group">
+          <label for="description">Description </label>
+          <textarea rows="4" class="form-control" id="description" name="description"><?= $params['product']->description ?? ''?></textarea>
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" class="form-control" id="price" name="price" value="<?= $params['product']->price ?? '' ?>">
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantity </label>
+          <input type="number" class="form-control" id="quantity" name="quantity" value="<?= $params['product']->quantity ?? '' ?>">
+        </div>
+        <div class="form-group">
+          <label for="reference">Reference</label>
+          <input type="text" class="form-control" id="reference" name="reference" value="<?= $params['product']->reference ?? '' ?>">
+        </div>
+        <div class="form-group">
+          <label for="permalink">Permalink </label>
+          <input type="text" class="form-control" id="permalink" name="permalink" value="<?= $params['product']->permalink ?? '' ?>">
+        </div> 
+        <div class="form-group">
+          <label for="picture">Picture</label>
+          <input type="text" class="form-control" id="picture" name="picture" value="<?= $params['product']->picture ?? '' ?>">
+        </div> 
+        <div class="form-group">
+            <label for="tva_id">TVA du product </label>
+            <select class="form-control" id="tva_id" name="tva_id">
+              <?php foreach ($params['tva'] as $tva) : ?>
+                <option value="<?= $tva->id ?>">
+                  <?= $tva->name ?>
+                </option> 
+              <?php endforeach;?>
+            </select>  
+        </div>
+        <div class="form-group">
+            <label for="category_id">Catégorie du product </label>
+            <select class="form-control" id="category_id" name="category_id">
+              <?php foreach ($params['category'] as $category) : ?>
+                <option value="<?= $category->id ?>">
+                  <?= $category->title ?>
+                </option> 
+              <?php endforeach; ?>
+            </select>  
+        </div> 
+        <button type="submit" class="btn btn-primary">
+          <?= isset($params['product']) ?'Modifier le produit':'Enregister le produit'?></button> 
+    </fieldset>
+</form>

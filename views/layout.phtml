@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>YH Technologies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= SCRIPTS . 'css' . DIRECTORY_SEPARATOR . 'bootstrap.css' ?>">
+    <link rel="stylesheet" href="<?= SCRIPTS . 'css' . DIRECTORY_SEPARATOR . 'main.css' ?>">
+</head>
+
+<body>
+    <?php if (isset($_SESSION['auth']) && $_SESSION['auth'] == 1) : ?>
+        <header>
+            <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/projet/admin/home"><img class="figure-img " src="/projet/public/img/icone.png"> YH Technologies </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/projet/admin/home"> Accueil </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/projet/admin/product">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/projet/admin/users">Clients</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/projet/admin/order">Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/projet/admin/category">Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/projet/admin/rating">Avis</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn btn-outline-primary"><i class="fa fa-user"> <?php echo ($_SESSION['lastname']) ?> </i>
+                    </div>
+                    <div>
+                        <a class="btn btn-outline-primary ml-auto" href="/projet/logout"><i class="fa fa-sign-out"></i> Deconnecter</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="jumbotron contener">
+            <div>
+                <?= $content ?>
+            </div>
+        </main>
+        <footer>
+            <small class="licence">
+                <a rel="license" href=""><img alt="YH Technoligies" src="/projet/public/img/icone.png" />
+                </a><br />Ce projet est pour l'examin final de la formation Developpeur/Integrateur Web, Pas de Rediffusion
+                - Attribution - Pas d'Utilisation Commerciale - Pas de Modification - International</a>.
+                <br />Les autorisations au-dela du champ de cette licence peuvent etre obtenues aupres de
+                <a href="" rel="">Hamrounijosef@gmail.com</a>. Ce projet a ete realisees par
+                <a href="https://www.linkedin.com/in/yussef-hamrouni-1b86b8150">Hamrouni Yussef</a>.
+            </small>
+        </footer>
+    <?php else : ?>
+        <header>
+            <a href="/projet/home"><img src="/projet/public/img/icone.png"></a>
+            <navbar class="navBar" id="navBar">
+                <a href="/projet/home">Accueil</a>
+                <a href="/projet/product">Produits</a>
+                <?php if (isset($_SESSION['auth'])) : ?>
+                    <a href="/projet/order">Mes Commandes</a>
+                <?php endif; ?>
+                <a href="/projet/rating">Nouveautes</a>
+                <?php if (isset($_SESSION['auth'])) : ?>
+                    <a><?php echo ($_SESSION['lastname']) ?></a>
+                    <a class="connecte" href="/projet/logout">Deconnecter</a>
+                <?php else : ?>
+                    <a class="connecte" href="/projet/login">Se Connecter</a>
+                <?php endif; ?>
+            </navbar>
+            <a class="icon" id="icon"><i class="fa fa-align-justify"></i></a>
+        </header>
+        <main class="contener">
+            <div>
+                <?= $content ?>
+            </div>
+        </main>
+        <footer>
+            <section class="info">
+                <article>
+                    <i class="fa fa-lock"></i>
+                    <small>Paiement securise au retrait</small>
+                </article>
+                <article>
+                    <i class="fa fa-truck"></i>
+                    <small>Livraison offerte</small>
+                </article>
+                <article>
+                    <i class="fa fa-money"></i>
+                    <small>Carte de fidelite</small>
+                </article>
+                <article>
+                    <a href="/projet/contact">
+                        <i class="fa fa-phone"></i>
+                        <small>Service client</small>
+                    </a>
+                </article>
+                <article>
+                    <i class="fa fa-check-circle"></i>
+                    <small>Garantie qualite</small>
+                </article>
+            </section>
+            <section class="bottombar">
+                <article>
+                    <ul>
+                        <li>
+                            <h2>Decouvrir YH Technoligies</h2>
+                        </li>
+                        <li>Notre histoire</li>
+                        <li>Nos boutiques</li>
+                        <li>Nos produits</li>
+                        <li>Espace clients professionnels</li>
+                        <li>Recrutement</li>
+                        <li>Contactez-nous !</li>
+                    </ul>
+                </article>
+                <article>
+                    <ul>
+                        <li>
+                            <h2>Commandez en ligne</h2>
+                        </li>
+                        <li>Premiere visite</li>
+                        <li>Aide - FAQ</li>
+                        <li>Service client</li>
+                        <li>Suivre ma commande</li>
+                        <li>Conditions generales de vente</li>
+                        <li>Informations legales</li>
+                    </ul>
+                </article>
+                <article>
+                    <h2>Suivez-nous !</h2>
+                    <ul>
+                        <li>Notre histoire</li>
+                        <li>Nos boutiques</li>
+                        <li>Nos partenaires</li>
+                        <li>Espace clients professionnels</li>
+                    </ul>
+                </article>
+            </section>
+            <small class="licence">
+                <a rel="license" href=""><img alt="YH Technoligies" src="/projet/public/img/icone.png" />
+                </a><br />Ce projet est pour l'examin final de la formation Developpeur/Integrateur Web, Pas de Rediffusion
+                - Attribution - Pas d'Utilisation Commerciale - Pas de Modification - International</a>.
+                <br />Les autorisations au-dela du champ de cette licence peuvent etre obtenues aupres de
+                <a href="" rel="">Hamrounijosef@gmail.com</a>. Ce projet a ete realisees par
+                <a href="https://www.linkedin.com/in/yussef-hamrouni-1b86b8150">Hamrouni Yussef</a>.
+            </small>
+        </footer>
+    <?php endif; ?>
+</body>
+<!--Bootstrap js-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<!--slider js-->
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="<?= SCRIPTS . 'js' . DIRECTORY_SEPARATOR . 'slick.min.js' ?>"> </script>
+<!--TinyMCE-->
+<script src="https://cdn.tiny.cloud/1/1m8qcunfy2n9l93xcv0llduk8he0g3i8dalu43zo3tiwpi4y/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    var tinymce;
+    tinymce.init({
+        selector: '#mytextarea'
+    });
+</script>
+<!--my js-->
+<script type="text/javascript" src="<?= SCRIPTS . 'js' . DIRECTORY_SEPARATOR . 'main.js' ?>"> </script>
+
+</html>

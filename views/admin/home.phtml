@@ -1,0 +1,131 @@
+<?php if (($_SESSION['success']) == true) : ?>
+    <div class='alert alert-success h5'>
+        Bienvenue <?= $_SESSION['lastname'] ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> 
+  <? $_SESSION['success'] = false ?>
+<?php endif; ?> 
+<h1 class="text-center">Tableau de bord</h1> 
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+    <div class="row mx-auto">
+        <div class="card text-white bg-primary mr-5 ml-5 mb-2" style="width: 10rem;">
+            <i class="mt-4 text-center display-4 fa fa-object-ungroup"></i>
+            <div class="card-header text-center">Product</div>
+            <div class="card-body">
+                <h5 class="card-title text-center"> 
+                <?php foreach ($params['products'] as $product) : ?>
+                    <?= $product->count ?>
+                <?php endforeach ?></h5> 
+                <div class="text-center">
+                    <a class="btn btn-primary text-center"href="/projet/admin/product"> Voir </a>
+                </div>
+            </div> 
+        </div>
+        <div class="card text-white bg-primary mr-5 ml-5 mb-2" style="width: 10rem;">
+            <i class="mt-4 text-center display-4 fa fa-users"></i>
+            <div class="card-header text-center">Customer</div>
+            <div class="card-body">
+                <h5 class="card-title text-center"><?php foreach ($params['users'] as $user) : ?>
+                        <?= $user->count ?>
+                    <?php endforeach ?></h5>
+                     <div class="text-center"><a class="btn btn-primary text-center"href="/projet/admin/users"> Voir </a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-white bg-primary mr-5 ml-5 mb-2" style="width: 10rem;">
+            <i class="mt-4 text-center display-4 fa fa-sitemap"></i>
+            <div class="card-header text-center">Category</div>
+            <div class="card-body ">
+                <h5 class="card-title  text-center">
+                    <?php foreach ($params['category'] as $category) : ?>
+                        <?= $category->count ?>
+                    <?php endforeach ?></h5>
+                <div class="text-center">
+                    <a class="btn btn-primary text-center"href="/projet/admin/category"> Voir </a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-white bg-primary mr-5 ml-5 mb-2" style="width: 10rem;">
+            <i class="mt-4 text-center display-4 fa fa-cart-plus"></i>
+            <div class="card-header text-center">Order</div>
+            <div class="card-body">
+                <h5 class="card-title text-center">
+                    <?php foreach ($params['order'] as $order) : ?>
+                        <?= $order->count ?> 
+                    <?php endforeach ?></h5>
+                <div class="text-center">
+                    <a class="btn btn-primary text-center"href="/projet/admin/order"> Voir </a>
+                </div> 
+            </div>
+        </div>
+        <div class="card text-white bg-primary mr-5 ml-5 mb-2" style="width: 10rem;">
+            <i class="mt-4 text-center display-4 fa fa-star"></i>
+            <div class="card-header text-center">Avis</div>
+            <div class="card-body">
+                <h5 class="card-title text-center">
+                    <?php foreach ($params['rating'] as $rating) : ?>
+                        <?= $rating->count ?> 
+                    <?php endforeach ?></h5>
+                <div class="text-center">
+                    <a class="btn btn-primary text-center"href="/projet/admin/rating"> Voir </a>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div> 
+<div class="row mt-5">
+  <div class="col-md-6">
+    <table class="table">
+      <h1 class="text-center mb-5">Derniers inscriptions</h1> 
+      <thead class="table-dark text-center"> 
+        <tr> 
+          <th scope="col">#</th>
+          <th scope="col">Nom</th> 
+          <th scope="col">N°telephone</th> 
+          <th scope="col">Email</th>
+          <th scope="col">Voir</th>
+        </tr>
+      </thead>
+      <tbody class="text-center"> 
+          <?php foreach ($params['lastUser'] as $user):?>
+        <tr>  
+          <th scope="row"><a href="/projet/admin/user/show/<?=$user->id?>"><?= $user->id?></a></td> 
+          <td><?= $user->lastname ?> <?= $user->firstname ?></td> 
+          <td><?= $user->phone?></td>    
+          <td><?= $user->email?></td>   
+          <td><a href="/projet/admin/user/show/<?= $user->id ?>"class="btn btn-primary">Voir</a></td>
+        </tr>  
+        <?php endforeach ?> 
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6"> 
+    <table class="table">
+<h1 class="text-center mb-5">Dernieres commandes</h1> 
+<thead class="table-dark text-center"> 
+  <tr> 
+    <th scope="col">#</th>
+    <th scope="col">Date de commande</th> 
+    <th scope="col">Client</th> 
+    <th scope="col">Produit</th>
+    <th scope="col">Voir</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody> 
+  <?php foreach ($params['orderDetails'] as $orderDetails):?>
+  <tr class="text-center">   
+    <th scope="row"><a href="/projet/admin/order/show/<?=$orderDetails->id?>"><?= $orderDetails->order_id?></a></td>
+    <td><?= $orderDetails->getCreatedAt()?></td> 
+    <td><a href="/projet/admin/user/show/<?=$orderDetails->customer_id?>"><?= $orderDetails->customer_id?></a></td>    
+    <td><a href="/projet/admin/product/show/<?=$orderDetails->product_id?>"><?= $orderDetails->product_id?></a></td>   
+    <td><a href="/projet/admin/order/show/<?= $orderDetails->id ?>"class="btn btn-primary">Voir</a></td>
+  </tr>
+  <?php endforeach ?>
+</tbody>
+</table>
+    </div>
+  </div> 
+

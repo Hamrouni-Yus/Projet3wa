@@ -1,0 +1,51 @@
+  <p class="text-right"><a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i class="fa fa-backward"></i> Retour</a>
+ </p>
+<table class="table"> 
+  <thead class="table-dark"> 
+    <tr> 
+      <th scope="col">#</th>
+      <th scope="col">Client</th> 
+      <th scope="col">Date de commande</th>  
+      <th scope="col">Date de payement</th> 
+      <th scope="col">Date de livraison</th> 
+      <th scope="col">Produit commandé</th>  
+      <th scope="col">Actions</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody> 	 
+    <tr> 
+      <th scope="row"><a href="/projet/order/<?=$params['order']->id?>"><?= $params['order']->id?></a></td> 
+      <td><?= $params['user']->lastname ?> <?= $params['user']->firstname ?></td> 
+      <td><?= $params['order']->getCreatedAt()?></td>  
+      <td><?= $params['order']->getPaidAt()?></td>    
+      <td><?= $params['order']->getDeliveredAt()?></td> 
+      <td> <?= $params['product']->reference?> / <?= $params['product']->quantity?>  </td>
+
+      <td>  
+        <a href="/projet/admin/order/edit/<?= $params['order']->id ?>"class="btn btn-warning">Modifier</a>  
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-trash"></i> Supprimer </button>
+      </td>
+    </tr>  
+    </tbody>
+</table> 
+<div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Etes vous sur ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form action="/projet/admin/order/destroy/<?= $params['order']->id ?>" method="POST" class="d-inline">
+          <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Valider </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

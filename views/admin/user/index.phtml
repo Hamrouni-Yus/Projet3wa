@@ -1,0 +1,58 @@
+ <?php if (($_SESSION['success'])==true): ?> 
+  <div class='alert alert-success h5'>Client enregistré</div>
+  
+<?=$_SESSION['success']=false ?>
+<?php endif; ?>
+ <?php if (($_SESSION['delete'])==true): ?> 
+  <div class='alert alert-danger h5'>Client effacé</div>
+  <?= $_SESSION['delete']=false?>
+<?php endif; ?>
+<h1 class="text-center mb-5">Les Clients</h1>  
+  <p>
+    <div class="text-right"><a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i class="fa fa-backward"></i> Retour</a>
+  </div>
+  <div class="text-left"><a href="/projet/admin/users/create" class="btn btn-outline-primary "><i class="fa fa-plus"></i> Ajouter un client </a>
+</div></p>
+<table class="table"> 
+  <thead class="table-dark"> 
+    <tr class="text-center"> 
+      <th scope="col">#</th> 
+      <th scope="col">Prenom</th> 
+      <th scope="col">Nom</th>  
+      <th scope="col">Email</th> 
+      <th scope="col">Telephone</th> 
+      <th scope="col">Role</th> 
+      <th scope="col">Actions</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($params['users'] as $user):?>
+    <?php if($user->role!='1') :?>
+    <tr class="text-center"> 
+      <th scope="row"> <?= $user->id?></a></td> 
+      <td><?= $user->firstname?></td>  
+      <td><?= $user->lastname?></td>  
+      <td><?= $user->email?></td>  
+      <td><?= $user->phone?></td>   
+      <td><?= $user->role?></td> 
+      <td> 
+        <a href="/projet/admin/user/show/<?=$user->id?>"class="btn btn-primary"><i class="fa fa-eye"></i> Voir </a>
+        <a href="/projet/admin/users/edit/<?= $user->id ?>"class="btn btn-warning">Modifier</a>  
+        <form action="/projet/admin/users/destroy/<?= $user->id ?>" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger">Supprimer </button>
+        </form> 
+      </td>
+    </tr>
+
+    <?php endif ?> 
+    <?php endforeach ?>
+  </tbody>
+</table>
+
+
+
+
+
+
+

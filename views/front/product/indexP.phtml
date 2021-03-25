@@ -1,0 +1,30 @@
+<div class="produits">
+    <h1>Nos produits </h1> 
+    <article class="choix">
+        <?php foreach ($params['category'] as $category):?> 
+            <a href="/projet/product/category/<?= $category->id ?>">
+                <div class="categories">
+                    <img src="<?= $category->picture ?>" alt="<?= $category->permalink ?>"> 
+                    <h5><?= $category->title ?></h5>  
+                </div>
+            </a>  
+        <?php endforeach ?>
+    </article>  
+    <h2>Nos produits dans nos boutiques</h2>
+    <article class="choix">
+        <?php foreach ($params['products'] as $product):?> 
+            <div class="produit">
+                <img class="image" src="<?= $product->picture ?>" alt="<?= $product->permalink ?>"> 
+                <div class="middle"> 
+                    <div class="text">
+                        <a href="/projet/product/show/<?= $product->id ?>">Voir </a>
+                        <a href="#" >Commander</a>
+                    </div>
+                </div>
+                <h4><?= $product->name ?></h4>
+                <p>Prix : <?= $product->price ?> Euro</p>
+                <p>Reference : <?= $product->reference ?></p>  
+            </div>
+        <?php endforeach ?>
+    </article>
+</div> 

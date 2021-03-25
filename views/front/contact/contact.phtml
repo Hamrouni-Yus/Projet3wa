@@ -1,0 +1,46 @@
+<div class="contact">
+        <h1>Remplissez le formulaire de contact</h1>
+<form action="/projet/contact" method="POST">
+    <fieldset> 
+          <?php if (!empty($_SESSION['errors'])): ?> 
+        <?php foreach($_SESSION['errors'] as $errors): ?> 
+              <div class="alert alert-danger"> 
+                      <?= $errors ?> 
+              </div> 
+      <?php endforeach ?>
+      <?php endif ?>
+                <?php if (!empty($_SESSION['success'])): ?>  
+              <div class="alert alert-success"> 
+                      Votre mail a bien eté envoié 
+              </div>   
+      <?php endif ?>
+    <div>
+        <label for="email"> Votre Email </label>
+        <input required type="email" name="email" id="email" value="<?= isset($_SESSION['inputs']['email'])?$_SESSION['inputs']['email']:'';?>">  
+    </div>
+    <div>
+        <label for="name">Votre Nom </label>
+        <input required type="text" name="name" id="name" value="<?= isset($_SESSION['inputs']['name'])?$_SESSION['inputs']['name']:'';?>">
+    </div>
+    <div>
+        <label for="service">Le service souhaité </label>
+        <select name="service" id="service">
+            <option value="0" <?= isset($_SESSION['inputs']['service']) && $_SESSION['inputs']['service'] == "0" ? 'selected' : '' ; ?> >SAV</option>
+            <option value="1" <?= isset($_SESSION['inputs']['service']) && $_SESSION['inputs']['service'] == "1" ? 'selected' : '' ; ?> >Compte</option>
+            <option value="2" <?= isset($_SESSION['inputs']['service']) && $_SESSION['inputs']['service'] == "2" ? 'selected' : '' ; ?> >Service client</option>
+            <option value="3" <?= isset($_SESSION['inputs']['service']) && $_SESSION['inputs']['service'] == "3" ? 'selected' : '' ; ?> >Autre</option>
+        </select>  
+    </div>
+    <div>
+        <label for="message">Decrivez votre probleme</label>
+        <textarea id="mytextarea" name="message"class="mytextarea"><?= isset($_SESSION['inputs']['message'])?$_SESSION['inputs']['message']:'';?></textarea> 
+    </div>
+    </fieldset> 
+    <div class="right">
+        <button class="plus"type="submit"> Envoyer </button>
+    </div>
+</form> 
+      <?php unset($_SESSION['inputs']);?>
+      <?php unset($_SESSION['success']);?>
+      <?php unset($_SESSION['errors']);?> 
+</div>

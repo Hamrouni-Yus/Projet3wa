@@ -1,0 +1,41 @@
+<h1><?= $params['order']->id ?? 'Créer une nouvelle commande'?></h1> 
+<form action="<?= isset ($params['order']) ? "/projet/admin/order/edit/{$params['order']->id}":
+  "/projet/admin/order/create" ?>" method="POST"> 
+  <p>
+    <div class="text-right"><a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i class="fa fa-backward"></i> Retour</a>
+  </div>
+</p><fieldset>  
+        <div class="form-group">
+          <img src="<?= $params['user']->picture ?>"style="width:50px;height=50px" alt="<?= $params['user']->permalink?>">
+          <div>
+          <label for="lastname">Nom du client : <?= $params['user']->lastname ?? ''?> </label> 
+          </div>
+          <div>
+          <label for="firstname">Prenom du client : <?= $params['user']->firstname ?? ''?> </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="createdAt">Date de commande: Le <?= $params['order']->getCreatedAt() ?? ''?></label> </div>
+        <div class="form-group">
+          <label for="deliveredAt">Date de livraison </label>
+          <input type="text" class="form-control" id="deliveredAt" name="deliveredAt" value="<?= $params['order']->getDeliveredAt() ?? ''?>">
+        </div>
+        <div class="form-group">
+          <label for="paidAt">Date de payement </label>
+          <input type="text" class="form-control" id="paidAt" name="paidAt" value="<?= $params['order']->getPaidAt() ?? ''?>">
+        </div>
+        <div class="form-group">
+          <label for="product_id">Produit : <?= $params['product']->id ?? ''?></label>
+          <input type="text" class="form-control" id="product_id" name="product_id" value="<?= $params['product']->id ?? ''?>">
+        </div> 
+        <div class="form-group">
+          <label for="quantity">Quantity : <?= $params['orderdetail']->quantity ?? ''?></label> 
+        <input type="text" class="form-control" id="quantity" name="quantity" value="<?= $params['orderdetail']->quantity ?? ''?>">
+        </div>
+ 
+
+        <button type="submit" class="btn btn-primary">
+          <?= isset($params['order']) ?'Modifier le produit':'Enregister le produit'?></button>
+          <?php $_GET['success']=true ?>
+    </fieldset>
+</form>  

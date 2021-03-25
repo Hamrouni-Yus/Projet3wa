@@ -1,0 +1,29 @@
+<div>
+    <h1>Category <?= $params['category']->title ?></h1>   
+    <p class="text-right">
+        <a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i class="fa fa-backward"></i> Retour</a>
+    </p>  
+<div class="row ">
+<?php foreach ($params['products'] as $product):?>
+<?php if ($product->category_id==$params['category']->id):?>
+<div class="card" style="width: 215px;">
+  <img src="<?= $product->picture ?>" class="card-img-top" style="height: 10rem;" alt="<?= $product->permalink ?>">
+  <div class="card-body">
+    <h5 class="card-title"><?= $product->name ?></h5> 
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Prix : <?= $product->price ?> Euro</li>
+    <li class="list-group-item">Reference : <?= $product->reference ?></li> 
+  </ul>
+  <div class="card-body">
+    <a href="/projet/admin/product/show/<?= $product->id ?>" class="card-link">Voir</a>
+    <a href="/projet/admin/product/edit/<?= $product->id ?>" class="card-link">Modifier</a>
+  </div>
+</div> 
+<?php endif ?>
+<?php endforeach ?>
+</div>  
+
+
+
+
